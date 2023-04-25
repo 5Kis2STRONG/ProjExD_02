@@ -15,7 +15,11 @@ def main():
     key_lst = pg.key.get_pressed()
     if key_lst[pg.K_UP]:
         kk_img.move_ip((0, -1))
+    bomb_X = rd.randint(0, 1600)
+    bomb_Y = rd.randint(0, 900)
     tmr = 0
+    vx = 0
+    vy = 0
 
     while True:
         for event in pg.event.get():
@@ -23,10 +27,11 @@ def main():
                 return 0
 
         tmr += 1
+        vx += 1
+        vy += 1
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, [900, 400])
-        screen.blit(bomb_img, [600, 200])
-
+        screen.blit(bomb_img, [bomb_X + vx, bomb_Y + vy])
         pg.display.update()
         clock.tick(1000)
 
