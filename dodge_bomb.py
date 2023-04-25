@@ -58,7 +58,7 @@ def main():
                 (0, -1): pg.transform.rotozoom(kk_img, 270, 1.0),
                 (0, +1): pg.transform.rotozoom(kk_img, 90, 1.0),
                 (-1, 0): pg.transform.rotozoom(kk_img, 0, 1.0),
-                (+1, 0): pg.transform.rotozoom(kk_img, 180, 1.0),
+                (+1, 0): pg.transform.flip(kk_img, True, False),
                 (-1, -1): pg.transform.rotozoom(kk_img, 315, 1.0),
                 (+1, +1): pg.transform.rotozoom(kk_img, 135, 1.0),
                 (+1, -1): pg.transform.rotozoom(kk_img, 225, 1.0),
