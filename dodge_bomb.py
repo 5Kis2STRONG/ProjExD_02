@@ -6,7 +6,7 @@ houkou = {
         pg.K_UP: (0, -1),
         pg.K_DOWN: (0, +1),
         pg.K_LEFT: (-1, 0),
-        pg.K_RIGHT: (+1, 0),
+        pg.K_RIGHT: (+1, 0),,
         }
 
 def check_bound(scr_rct: pg.Rect, obj_rct: pg.Rect) -> tuple[bool, bool]:
@@ -41,6 +41,17 @@ def main():
     kk_rct = kk_img.get_rect()
     kk_rct.center = 900, 400
     tmr = 0
+    
+    kk_houkou = {
+                (0, -1): pg.transform.rotozoom(kk_img, 270, 1.0),
+                (0, +1): pg.transform.rotozoom(kk_img, 90, 1.0),
+                (-1, 0): pg.transform.rotozoom(kk_img, 0, 1.0),
+                (+1, 0): pg.transform.rotozoom(kk_img, 180, 1.0),
+                (-1, -1): pg.transform.rotozoom(kk_img, 315, 1.0),
+                (+1, +1): pg.transform.rotozoom(kk_img, 135, 1.0),
+                (+1, -1): pg.transform.rotozoom(kk_img, 225, 1.0),
+                (-1, +1): pg.transform.rotozoom(kk_img, 45, 1.0)
+                }
 
     
     kk_houkou = {
@@ -78,8 +89,6 @@ def main():
                 if key_lst[k]:
                     if mv == num:
                         kk_img = img
-
-        
 
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_rct)
