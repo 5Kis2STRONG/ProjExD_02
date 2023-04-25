@@ -41,6 +41,8 @@ def main():
     kk_rct = kk_img.get_rect()
     kk_rct.center = 900, 400
     tmr = 0
+    overtime = -1
+    gameover = False
     
     kk_houkou = {
                 (0, -1): pg.transform.rotozoom(kk_img, 270, 1.0),
@@ -68,8 +70,7 @@ def main():
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
-                return 0
-            
+                return 0      
 
         tmr += 1
         overtime = -1
@@ -104,9 +105,9 @@ def main():
             kk_img = pg.transform.rotozoom(kk_img, 0, 10)
             overtime = tmr
             gameover = True
-            if gameover:
-                if (tmr - overtime) > 200:
-                    return
+        if gameover:
+            if (tmr - overtime) > 200:
+                return
 
         screen.blit(bb_img, bb_rct)  
 
