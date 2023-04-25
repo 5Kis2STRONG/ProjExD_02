@@ -69,6 +69,8 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return 0
+            
+            unti
 
         tmr += 1
         overtime = -1
