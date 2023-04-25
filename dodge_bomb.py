@@ -70,7 +70,6 @@ def main():
             if event.type == pg.QUIT: 
                 return 0
             
-            unti
 
         tmr += 1
         overtime = -1
