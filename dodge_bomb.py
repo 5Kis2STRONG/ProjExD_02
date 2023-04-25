@@ -6,7 +6,7 @@ houkou = {
         pg.K_UP: (0, -1),
         pg.K_DOWN: (0, +1),
         pg.K_LEFT: (-1, 0),
-        pg.K_RIGHT: (+1, 0)
+        pg.K_RIGHT: (+1, 0),
         }
 
 def check_bound(scr_rct: pg.Rect, obj_rct: pg.Rect) -> tuple[bool, bool]:
@@ -42,12 +42,26 @@ def main():
     kk_rct.center = 900, 400
     tmr = 0
 
+    
+    kk_houkou = {
+                (0, -1): pg.transform.rotozoom(kk_img, 270, 1.0),
+                (0, +1): pg.transform.rotozoom(kk_img, 90, 1.0),
+                (-1, 0): pg.transform.rotozoom(kk_img, 0, 1.0),
+                (+1, 0): pg.transform.rotozoom(kk_img, 180, 1.0),
+                (-1, -1): pg.transform.rotozoom(kk_img, 315, 1.0),
+                (+1, +1): pg.transform.rotozoom(kk_img, 135, 1.0),
+                (+1, -1): pg.transform.rotozoom(kk_img, 225, 1.0),
+                (-1, +1): pg.transform.rotozoom(kk_img, 45, 1.0)
+                }
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return 0
 
         tmr += 1
+        overtime = -1
+        gameoverr = False
 
         key_lst = pg.key.get_pressed()
         for k, mv in houkou.items():
@@ -58,7 +72,14 @@ def main():
             for k, mv in houkou.items():
                 if key_lst[k]:
                     kk_rct.move_ip(-mv[0], -mv[1])
-           
+
+        for k, mv in houkou.items():
+            for num, img in kk_houkou.items():
+                if key_lst[k]:
+                    if mv == num:
+                        kk_img = img
+
+        
 
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_rct)
@@ -68,6 +89,15 @@ def main():
             vx *= -1
         if not tate:
             vy *= -1
+        if kk_rct.colliderect(bb_rct): 
+            kk_img = pg.image.load("fig/7.png")
+            kk_img = pg.transform.rotozoom(kk_img, 0, 10)
+            overtime = tmr
+            gameover = True
+            if gameover:
+                if (tmr - overtime) > 200:
+                    return
+
         screen.blit(bb_img, bb_rct)  
 
 
